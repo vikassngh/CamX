@@ -55,7 +55,7 @@ export default function HomeScreen({navigation}) {
             actions={actions}
             onPressItem={name => {
               if(name==="bt_scanDocument")
-                navigation.navigate('Scanner')
+                navigation.navigate('Camera')
               else if(name==="bt_textToSpeech")
                 navigation.navigate('TTS')
               else if(name==="bt_speechToText")

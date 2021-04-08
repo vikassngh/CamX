@@ -6,6 +6,7 @@ import { StatusBar } from 'react-native';
 import HomeScreen from "./src/screens/Homescreen";
 import TextToSpeech from "./src/components/TTS";
 import SpeechText from "./src/components/STT";
+import Camera from './src/screens/Camera';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,9 @@ export default function App() {
           title: 'Speech To Text',
           headerLeft: false,
           headerTitleStyle: { alignSelf: 'center' }
+        }}/>
+        <Stack.Screen name="Camera" component={Camera} options={{
+          headerShown:false
         }}/>
       </Stack.Navigator>
     </NavigationContainer>
