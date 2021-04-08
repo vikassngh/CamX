@@ -3,14 +3,13 @@ import {Button, StatusBar, StyleSheet, View, Image} from 'react-native';
 import {CropView} from 'react-native-image-crop-tools';
 
 function Edit({route,navigation}) {
-
   const {photo,idx} = route.params;
   const [uri, setUri] = useState();
   const cropViewRef = useRef();
 
   useEffect(() => {
-      const image = photo[idx].uri;
-      setUri(image);
+    const image = photo[idx].uri;
+    setUri(image);
   }, []);
 
   return (
@@ -45,7 +44,7 @@ function Edit({route,navigation}) {
       </View>
     </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

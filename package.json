@@ -23,6 +23,7 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-google-speech-to-text": "^1.0.4",
     "react-native-image-crop-tools": "^1.3.6",
+    "react-native-pdf-lib": "^1.0.0",
     "react-native-reanimated": "^2.1.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.0.0",
