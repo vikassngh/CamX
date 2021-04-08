@@ -162,7 +162,7 @@ export default function TextToSpeech({navigation}) {
         </View>
         <View style={styles.sliderContainer}>
           <Text style={styles.sliderLabel}>
-            {`Speed: ${speechPitch.toFixed(2)}`}
+            {`Pitch: ${speechPitch.toFixed(2)}`}
           </Text>
           <Slider
             style={styles.slider}

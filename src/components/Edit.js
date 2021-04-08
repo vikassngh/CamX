@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import {Button, StatusBar, StyleSheet, View, Image} from 'react-native';
+import {StatusBar, StyleSheet, View, SafeAreaView, TouchableOpacity} from 'react-native';
 import {CropView} from 'react-native-image-crop-tools';
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 function Edit({route,navigation}) {
   const {photo,idx} = route.params;
@@ -13,47 +14,77 @@ function Edit({route,navigation}) {
   }, []);
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <View style={styles.container}>
-        {uri !== undefined && <CropView
-          sourceUrl={uri}
-          style={styles.cropView}
-          ref={cropViewRef}
-          onImageCrop={(res) => {
-            photo[idx]=res
-            navigation.navigate('Preview',{
-              photo:photo,
-              idx:idx
-            });
-          }}
-          aspectRatio={{width: 16, height: 9}}
-        />}
-        <Button
-          title={'Done'}
-          onPress={() => {
-            cropViewRef.current.saveImage(true,100);
-          }}
-        />
-        <Button
-          title={'Rotate'}
-          onPress={() => {
-            cropViewRef.current.rotateImage(true);
-          }}
-        />
-      </View>
-    </>
+      <SafeAreaView forceInset={{top:'always'}} style={{flex:1,backgroundColor: "black"}}>
+        <StatusBar barStyle="dark-content" />
+        <View style={styles.tStack}>
+          <TouchableOpacity
+              style={{marginVertical:30,marginLeft:325}}
+              onPress={()=>{
+                photo.splice(idx);
+                navigation.navigate('Preview',{
+                  photo:photo
+                });
+              }}
+          >
+            <Icon name="delete-outline" size={42} color={"orangered"}/>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flex: 1, justifyContent: 'center'}}>
+          {uri !== undefined && <CropView
+              sourceUrl={uri}
+              style={{flex:1}}
+              ref={cropViewRef}
+              onImageCrop={(res) => {
+                photo[idx]=res
+                navigation.navigate('Preview',{
+                  photo:photo,
+                  idx:idx
+                });
+              }}
+              aspectRatio={{width: 16, height: 9}}
+          />}
+        </View>
+        <View style={styles.bStack}>
+          <TouchableOpacity
+              style={{marginVertical:20,marginLeft:30,marginRight:75}}
+              onPress={()=>{
+                navigation.goBack();
+              }}
+          >
+            <Icon name="cancel" size={42} color={"orangered"}/>
+          </TouchableOpacity>
+          <TouchableOpacity
+              style={{marginVertical:20,marginHorizontal:30}}
+              onPress={() => {
+                cropViewRef.current.rotateImage(true);
+              }}
+          >
+            <Icon name="rotate-left" size={42} color={"white"}/>
+          </TouchableOpacity>
+          <TouchableOpacity
+              style={{marginVertical:20,marginLeft:75,marginRight:30}}
+              onPress={() => {
+                cropViewRef.current.saveImage(true,100);
+              }}
+          >
+            <Icon name="check-circle" size={42} color={"deepskyblue"}/>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  tStack:{
+    display:"flex",
+    top: 0,
+    flexDirection:"row",
   },
-  cropView: {
-    flex: 1,
-    backgroundColor: 'red'
-  },
+  bStack:{
+    display:"flex",
+    bottom: 0,
+    flexDirection:"row",
+  }
 });
 
 export default Edit;

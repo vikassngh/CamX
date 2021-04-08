@@ -9,6 +9,7 @@ import SpeechText from "./src/components/STT";
 import Camera from './src/screens/Camera';
 import Preview from "./src/screens/Preview";
 import Edit from "./src/components/Edit";
+import ImgToPdf from './src/screens/ImgToPdf';
 
 const Stack = createStackNavigator();
 
@@ -20,27 +21,44 @@ export default function App() {
         stackAnimation:'fade'
       }}>
         <Stack.Screen name="Home" component={HomeScreen} options={{
-          title: 'HOME',
-          headerShown:false
+          title: 'Recents',
+          headerTitleStyle: {
+            fontSize:35,
+            alignSelf: 'center'
+          }
         }}/>
         <Stack.Screen name="TTS" component={TextToSpeech} options={{
           title: 'Text To Speech',
           headerLeft: false,
-          headerTitleStyle: { alignSelf: 'center' }
+          headerTitleStyle: {
+            fontSize:35,
+            alignSelf: 'center'
+          }
         }}/>
         <Stack.Screen name="STT" component={SpeechText} options={{
           title: 'Speech To Text',
-          headerTitleStyle: { alignSelf: 'center' }
+          headerTitleStyle: {
+            fontSize:35,
+            alignSelf: 'center'
+          }
         }}/>
         <Stack.Screen name="Camera" component={Camera} options={{
           headerShown:false
         }}/>
         <Stack.Screen name="Preview" component={Preview} options={{
           title:'Preview',
-          headerTitleStyle: { alignSelf: 'center' }
+          headerTitleStyle: {
+            fontSize:35,
+          },
         }}/>
         <Stack.Screen name="Edit" component={Edit} options={{
           headerShown:false
+        }}/>
+        <Stack.Screen name="imgToPdf" component={ImgToPdf} options={{
+          title: 'Image To PDF',
+          headerTitleStyle: {
+            fontSize:35
+          },
         }}/>
       </Stack.Navigator>
     </NavigationContainer>

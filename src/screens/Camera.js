@@ -53,7 +53,9 @@ export default class Camera extends React.Component {
                                     : RNCamera.Constants.FlashMode.off
                               });
                           }}>
-                            <Icon name="flash-on" size={30} color={"white"}/>
+                            {flashMode === RNCamera.Constants.FlashMode.off
+                                ? <Icon name="flash-off" size={30} color={"white"}/>
+                                : <Icon name="flash-on" size={30} color={"white"}/>}
                         </TouchableOpacity>
                     </View>
                     <View style={styles.bottomStack}>
