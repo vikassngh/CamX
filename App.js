@@ -22,9 +22,15 @@ export default function App() {
       }}>
         <Stack.Screen name="Home" component={HomeScreen} options={{
           title: 'Recents',
+          headerStyle: {
+            // backgroundColor:'red',
+            height:100,
+          },
           headerTitleStyle: {
-            fontSize:35,
-            alignSelf: 'center'
+            fontSize:70,
+            fontFamily:'cursive',
+            alignSelf: 'center',
+            // color:'white'
           }
         }}/>
         <Stack.Screen name="TTS" component={TextToSpeech} options={{

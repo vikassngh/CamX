@@ -32,19 +32,19 @@ export default class ImgToPdf extends React.Component {
                             </View>
                         ))}
                     </View>
-                    <View style={{position: 'absolute', flexDirection: 'row', top: 680, alignSelf: 'center'}}>
-                        {/*<TouchableOpacity
+                    <View style={{position: 'absolute', flexDirection: 'row', top: 500, alignSelf: 'center'}}>
+                        <TouchableOpacity
                             style={styles.button}
-                            onPress={this.addImg()}
+                            // onPress={this.addImg()}
                         >
                             <Icon name="add" size={50} color={"white"}/>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={createPdf(mulHtml(photo))}
+                            // onPress={createPdf(mulHtml(photo))}
                         >
                             <Icon name="check" size={50} color={"white"}/>
-                        </TouchableOpacity>*/}
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
             </SafeAreaView>
