@@ -7,6 +7,8 @@ import HomeScreen from "./src/screens/Homescreen";
 import TextToSpeech from "./src/components/TTS";
 import SpeechText from "./src/components/STT";
 import Camera from './src/screens/Camera';
+import Preview from "./src/screens/Preview";
+import Edit from "./src/components/Edit";
 
 const Stack = createStackNavigator();
 
@@ -28,10 +30,16 @@ export default function App() {
         }}/>
         <Stack.Screen name="STT" component={SpeechText} options={{
           title: 'Speech To Text',
-          headerLeft: false,
           headerTitleStyle: { alignSelf: 'center' }
         }}/>
         <Stack.Screen name="Camera" component={Camera} options={{
+          headerShown:false
+        }}/>
+        <Stack.Screen name="Preview" component={Preview} options={{
+          title:'Preview',
+          headerTitleStyle: { alignSelf: 'center' }
+        }}/>
+        <Stack.Screen name="Edit" component={Edit} options={{
           headerShown:false
         }}/>
       </Stack.Navigator>
