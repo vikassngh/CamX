@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {View, Image, ScrollView, TouchableOpacity, Text, StyleSheet, Alert, Platform} from 'react-native';
+import {View, Image, ScrollView, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {SafeAreaView} from "react-native-safe-area-context/src/SafeAreaView";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {createPDF} from '../utils/helper';
+import {createPDF, mulHtml, toPdf} from '../utils/helper';
 import * as ImagePicker from 'react-native-image-picker';
 
 export default class ImgToPdf extends React.Component {
@@ -15,8 +15,8 @@ export default class ImgToPdf extends React.Component {
         const {navigation} = this.props
         return (
             <SafeAreaView forceInset={{top: 'always'}}>
-                <ScrollView style={{height: '100%'}}>
-                    <View style={styles.Prev}>
+                <ScrollView style={{height: '90%'}}>
+                    <View style={styles.prev}>
                         {photo.map((value, idx) => (
                             <View>
                                 <TouchableOpacity
@@ -33,20 +33,23 @@ export default class ImgToPdf extends React.Component {
                             </View>
                         ))}
                     </View>
-                    <View style={{position: 'absolute', flexDirection: 'row', top: 500, alignSelf: 'center'}}>
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={this.addImg()}
-                        >
-                            <Icon name="add" size={50} color={"white"}/>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={}>
-                            <Icon name="check" size={50} color={"white"}/>
-                        </TouchableOpacity>
-                    </View>
                 </ScrollView>
+                <View style={styles.buttonView}>
+                    <TouchableOpacity
+                        style={styles.buttonL}
+                        onPress={this.addImg()}
+                    >
+                        <Icon name="add" size={50} color={"white"}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.buttonR}
+                        // onPress={createPDF(photo)}
+                        // onPress={toPdf(photo)}
+                        // onPress={createPDF(mulHtml(photo))}
+                    >
+                        <Icon name="check" size={50} color={"white"}/>
+                    </TouchableOpacity>
+                </View>
             </SafeAreaView>
         );
     }
@@ -55,7 +58,7 @@ export default class ImgToPdf extends React.Component {
         const photo = this.state.photo
         const options = {
             mediaType:'photo',
-            includeBase64: Platform.OS === "ios",
+            includeBase64: true,
         }
         ImagePicker.launchImageLibrary(options, response => {
             if( response.didCancel === true){
@@ -70,18 +73,41 @@ export default class ImgToPdf extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    button: {
-        height: 60,
-        width: 60,
-        zIndex: 3,
-        backgroundColor: 'black',
-        borderRadius: 40,
+    buttonView: {
+        flexDirection:'row',
+        backgroundColor:'black',
+        width:'100%',
+        height:'10%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginHorizontal: 100
     },
-    Prev: {
-        height: 600,
+    buttonL: {
+        height: '90%',
+        width: '15%',
+        borderStyle:'solid',
+        borderWidth: 2,
+        borderRadius: 10,
+        borderColor:'white',
+        backgroundColor:'black',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight:'30%'
+
+    },
+    buttonR: {
+        height: '90%',
+        width: '15%',
+        borderStyle:'solid',
+        borderWidth: 2,
+        borderRadius: 10,
+        borderColor:'white',
+        backgroundColor:'black',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft:'30%'
+    },
+    prev: {
+        height: '100%',
         width: '100%',
         flex: 1,
         flexDirection: 'row',
@@ -90,8 +116,8 @@ const styles = StyleSheet.create({
     },
     photo: {
         backgroundColor: '#fff',
-        width: 188,
-        height: 250,
+        width: 173,
+        height: 230,
         resizeMode: 'contain',
         margin: '2%',
     },
