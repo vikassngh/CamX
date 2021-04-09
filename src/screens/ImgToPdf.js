@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {View, Image, ScrollView, TouchableOpacity, Text, StyleSheet, Alert} from 'react-native';
+import {View, Image, ScrollView, TouchableOpacity, Text, StyleSheet, Alert, Platform} from 'react-native';
 import {SafeAreaView} from "react-native-safe-area-context/src/SafeAreaView";
-// import {pickImage, processLocalImage,createPdf, mulHtml} from "../Utils/helpers";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import {createPDF} from '../utils/helper';
+// import * as ImagePicker from 'react-native-image-picker';
 
 export default class ImgToPdf extends React.Component {
     state = {
@@ -41,7 +42,7 @@ export default class ImgToPdf extends React.Component {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.button}
-                            // onPress={createPdf(mulHtml(photo))}
+                            // onPress={createPDF(photo)}
                         >
                             <Icon name="check" size={50} color={"white"}/>
                         </TouchableOpacity>
@@ -53,20 +54,13 @@ export default class ImgToPdf extends React.Component {
 
     addImg = () => async () => {
         const photo = this.state.photo
-        let src = "";
-        try {
-            const uri = (await pickImage(false)) || {};
-            if (uri) {
-                src = await processLocalImage(uri, false);
-                photo.push(uri)
-            }
-        } catch (error) {
-            console.log(error);
-            src = "";
+        const options = {
+            mediaType:'photo',
+            includeBase64: Platform.OS === "ios",
         }
-        if (!src) {
-            return null;
-        }
+        ImagePicker.launchImageLibrary(options, response => {
+            photo.push(response);
+        });
         this.setState({photo})
     }
 

@@ -1,7 +1,7 @@
 import {Alert, Platform} from "react-native";
 import PDFLib, { PDFDocument, PDFPage } from 'react-native-pdf-lib';
 
-export const createPDF = (photo) => async () => {
+export const createPDF = (photo) => {
     try{
         const page1 = PDFPage
             .create()
@@ -13,8 +13,9 @@ export const createPDF = (photo) => async () => {
                 width: photo[0].width,
                 height: photo[0].height,
             });
-        const docsDir = await PDFLib.getDocumentsDirectory();
-        const pdfPath = `${docsDir}/sample.pdf`;
+        // const docsDir = await PDFLib.getDocumentsDirectory();
+        // const pdfPath = `${docsDir}/sample.pdf`;
+        const pdfPath = `Documents/sample.pdf`;
         PDFDocument
             .create(pdfPath)
             .addPages(page1)
@@ -23,9 +24,7 @@ export const createPDF = (photo) => async () => {
                 console.log('PDF created at: ' + path);
             });
     } catch (error){
-        console.log('1111111');
         console.log(error);
     }
-
 
 }

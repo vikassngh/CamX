@@ -101,9 +101,10 @@ export default class Camera extends React.Component {
             const options = { quality: 1, base64: true };
             const img=await this.camera.takePictureAsync(options)
             photo.push(img)
-            // navigation.navigate('EDIT',{
-            //     photo:img
-            // });
+            /*navigation.navigate('Edit',{
+                photo:photo,
+                idx:idx-1,
+            });*/
             this.setState({ photo })
         }
     }
