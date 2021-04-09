@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Platform, Image, TouchableOpacity, Alert} from 'react-native';
+import { StyleSheet, Text, View, Platform, Image, TouchableOpacity, Alert, StatusBar } from "react-native";
 import { RNCamera } from 'react-native-camera';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {SafeAreaView} from "react-native-safe-area-context/src/SafeAreaView";
@@ -19,6 +19,7 @@ export default class Camera extends React.Component {
 
         return (
             <SafeAreaView forceInset={{top:'always'}} style={{flex:1,backgroundColor: "black"}}>
+                <StatusBar hidden={true}/>
                 <View style={styles.container}>
                     <RNCamera
                       ref={ref => {

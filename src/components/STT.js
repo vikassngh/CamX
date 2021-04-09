@@ -107,16 +107,11 @@ const SpeechText = () => {
             {`Error: \n ${error}`}
           </Text>
         </View>
-        <Pressable onPressIn={startRecognizing} onPressOut={stopRecognizing} style={({ pressed }) => [
-          {
-            backgroundColor: pressed
-              ? 'black'
-              : 'red'
-          },
-          styles.button
-        ]}>
-          <Icon name="microphone" size={40} color={"white"}/>
-        </Pressable>
+        <View style={styles.horizontalView}>
+          <TouchableOpacity style={styles.button2} onPress={destroyRecognizer}>
+            <Text style={styles.text2}>RESET</Text>
+          </TouchableOpacity>
+        </View>
         <Text style={styles.text}>
           Results
         </Text>
@@ -131,11 +126,16 @@ const SpeechText = () => {
             );
           })}
         </ScrollView>
-        <View style={styles.horizontalView}>
-          <TouchableOpacity style={styles.button2} onPress={destroyRecognizer}>
-            <Text style={styles.text2}>DESTROY</Text>
-          </TouchableOpacity>
-        </View>
+        <Pressable onPressIn={startRecognizing} onPressOut={stopRecognizing} style={({ pressed }) => [
+          {
+            backgroundColor: pressed
+              ? 'black'
+              : 'red'
+          },
+          styles.button
+        ]}>
+          <Icon name="microphone" size={40} color={"white"}/>
+        </Pressable>
       </View>
     </SafeAreaView>
   );
@@ -157,7 +157,8 @@ const styles = StyleSheet.create({
     color:'white',
     fontSize: 16,
     alignSelf:'center',
-    padding:3
+    padding:3,
+    fontWeight:'bold'
   },
   container: {
     flex: 1,
@@ -189,8 +190,6 @@ const styles = StyleSheet.create({
   },
   horizontalView: {
     flexDirection: 'row',
-    position: 'absolute',
-    bottom: 0,
   },
   textStyle: {
     padding: 3,

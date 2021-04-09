@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator,CardStyleInterpolators } from '@react-navigation/stack';
 import { StatusBar } from 'react-native';
 import HomeScreen from "./src/screens/Homescreen";
 import TextToSpeech from "./src/components/TTS";
@@ -16,39 +16,37 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <StatusBar style="dark"/>
-      <Stack.Navigator screenOptions={{
-        stackAnimation:'fade'
-      }}>
+      <StatusBar barStyle="dark-content" backgroundColor="white"/>
+      <Stack.Navigator initialRouteName={'Home'}>
         <Stack.Screen name="Home" component={HomeScreen} options={{
           title: 'Recents',
-          headerStyle: {
-            // backgroundColor:'red',
-            height:100,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          headerStyle:{
+            backgroundColor:'white'
           },
           headerTitleStyle: {
-            fontSize:70,
-            fontFamily:'cursive',
+            fontSize:45,
             alignSelf: 'center',
-            // color:'white'
           }
         }}/>
         <Stack.Screen name="TTS" component={TextToSpeech} options={{
           title: 'Text To Speech',
           headerLeft: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           headerTitleStyle: {
-            fontSize:35,
+            fontSize:30,
             alignSelf: 'center'
           }
         }}/>
         <Stack.Screen name="STT" component={SpeechText} options={{
           title: 'Speech To Text',
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           headerTitleStyle: {
-            fontSize:35,
-            alignSelf: 'center'
+            fontSize:30
           }
         }}/>
         <Stack.Screen name="Camera" component={Camera} options={{
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           headerShown:false
         }}/>
         <Stack.Screen name="Preview" component={Preview} options={{
@@ -62,8 +60,9 @@ export default function App() {
         }}/>
         <Stack.Screen name="imgToPdf" component={ImgToPdf} options={{
           title: 'Image To PDF',
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           headerTitleStyle: {
-            fontSize:35
+            fontSize:30
           },
         }}/>
       </Stack.Navigator>
