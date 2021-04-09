@@ -3,7 +3,7 @@ import {View, Image, ScrollView, TouchableOpacity, Text, StyleSheet, Alert, Plat
 import {SafeAreaView} from "react-native-safe-area-context/src/SafeAreaView";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {createPDF} from '../utils/helper';
-// import * as ImagePicker from 'react-native-image-picker';
+import * as ImagePicker from 'react-native-image-picker';
 
 export default class ImgToPdf extends React.Component {
     state = {
@@ -36,7 +36,7 @@ export default class ImgToPdf extends React.Component {
                     <View style={{position: 'absolute', flexDirection: 'row', top: 500, alignSelf: 'center'}}>
                         <TouchableOpacity
                             style={styles.button}
-                            // onPress={this.addImg()}
+                            onPress={this.addImg()}
                         >
                             <Icon name="add" size={50} color={"white"}/>
                         </TouchableOpacity>
@@ -59,7 +59,11 @@ export default class ImgToPdf extends React.Component {
             includeBase64: Platform.OS === "ios",
         }
         ImagePicker.launchImageLibrary(options, response => {
-            photo.push(response);
+            if( response.didCancel === true){
+                return;
+            } else {
+                photo.push(response);
+            }
         });
         this.setState({photo})
     }
