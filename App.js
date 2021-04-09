@@ -10,6 +10,7 @@ import Camera from './src/screens/Camera';
 import Preview from "./src/screens/Preview";
 import Edit from "./src/components/Edit";
 import ImgToPdf from './src/screens/ImgToPdf';
+import TFI from "./src/components/TextFromImage";
 
 const Stack = createStackNavigator();
 
@@ -59,6 +60,13 @@ export default function App() {
         }}/>
         <Stack.Screen name="imgToPdf" component={ImgToPdf} options={{
           title: 'Image To PDF',
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          headerTitleStyle: {
+            fontSize:30
+          },
+        }}/>
+        <Stack.Screen name="TFI" component={TFI} options={{
+          title: 'Text From Image',
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           headerTitleStyle: {
             fontSize:30

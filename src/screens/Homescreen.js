@@ -62,6 +62,8 @@ export default function HomeScreen({navigation}) {
                 navigation.navigate('STT')
               else if(name==="bt_imageToPdf")
                 navigation.navigate('imgToPdf')
+              else if(name==="bt_textFromImage")
+                navigation.navigate('TFI')
               console.log(`selected button: ${name}`);
             }}
             buttonSize={70}
@@ -75,13 +77,14 @@ export default function HomeScreen({navigation}) {
 }
 
 const actions = [
-  /*{
-      text: "Image Encryption",
-      name: "bt_imageEncryption",
+  {
+      text: "Text From Image",
+      name: "bt_textFromImage",
       buttonSize: 56,
+      color:'black',
       icon: <Icon name="image" size={30} color={"white"}/>,
       position: 1
-  },*/
+  },
   {
     text: "Image To PDF",
     name: "bt_imageToPdf",

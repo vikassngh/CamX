@@ -193,10 +193,10 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     padding: 3,
-    borderColor:'red',
+    borderColor:'black',
     borderWidth:1,
     margin:10,
-    backgroundColor: 'dimgray'
+    backgroundColor: '#ad9f9e'
   },
   text:{
     textAlign: 'center',
