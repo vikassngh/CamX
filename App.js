@@ -31,7 +31,6 @@ export default function App() {
         }}/>
         <Stack.Screen name="TTS" component={TextToSpeech} options={{
           title: 'Text To Speech',
-          headerLeft: false,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           headerTitleStyle: {
             fontSize:30,

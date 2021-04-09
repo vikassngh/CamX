@@ -20,7 +20,7 @@ function Edit({route,navigation}) {
           <TouchableOpacity
               style={{marginVertical:30,marginLeft:325}}
               onPress={()=>{
-                photo.splice(idx);
+                photo.splice(idx,1);
                 navigation.navigate('Preview',{
                   photo:photo
                 });

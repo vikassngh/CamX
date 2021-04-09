@@ -129,8 +129,8 @@ const SpeechText = () => {
         <Pressable onPressIn={startRecognizing} onPressOut={stopRecognizing} style={({ pressed }) => [
           {
             backgroundColor: pressed
-              ? 'black'
-              : 'red'
+              ? 'deepskyblue'
+              : 'black'
           },
           styles.button
         ]}>
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   button2:{
     width:100,
     height:30,
-    backgroundColor:'red',
+    backgroundColor:'black',
     borderWidth: 1,
     borderRadius:30,
     margin:5,

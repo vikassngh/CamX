@@ -157,7 +157,7 @@ export default function TextToSpeech({navigation}) {
             minimumValue={0.01}
             maximumValue={0.99}
             onValueChange={updateSpeechRate}
-            thumbStyle={{ height: 20, width: 20, backgroundColor: 'red' }}
+            thumbStyle={{ height: 20, width: 20, backgroundColor: 'black' }}
           />
         </View>
         <View style={styles.sliderContainer}>
@@ -170,7 +170,7 @@ export default function TextToSpeech({navigation}) {
             minimumValue={0.01}
             maximumValue={0.99}
             onValueChange={updateSpeechPitch}
-            thumbStyle={{ height: 20, width: 20, backgroundColor: 'red' }}
+            thumbStyle={{ height: 20, width: 20, backgroundColor: 'black' }}
           />
         </View>
         <Text style={styles.sliderContainer}>
@@ -203,11 +203,13 @@ export default function TextToSpeech({navigation}) {
           onChangeText={(text) => setText(text)}
           placeholder="Enter Your Text Here!"
           onSubmitEditing={Keyboard.dismiss}
+          textAlign="center"
           multiline
         />
-        <TouchableOpacity title="Press to hear some words"
-                          style={styles.speak}
-                          onPress={playing? stopText: readText}>
+        <TouchableOpacity
+            title="Press to hear some words"
+            style={styles.speak}
+            onPress={playing? stopText: readText}>
           <Icon name="volume-high" size={40} color={"white"}/>
         </TouchableOpacity>
       </View>
@@ -252,7 +254,7 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent'
   },
   textInput: {
-    borderColor: 'red',
+    borderColor: 'black',
     borderWidth: 1,
     color: 'black',
     width: '100%',
@@ -261,7 +263,7 @@ const styles = StyleSheet.create({
   button:{
     width:150,
     height:26,
-    backgroundColor:'red',
+    backgroundColor:'black',
     borderWidth: 1,
     borderRadius:20,
     marginTop: 5,
@@ -290,7 +292,7 @@ const styles = StyleSheet.create({
   speak:{
     height:60,
     width:60,
-    backgroundColor:'red',
+    backgroundColor:'black',
     borderRadius:40,
     justifyContent:'center',
     alignItems:'center',
