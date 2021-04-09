@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 100
     },
     Prev: {
-        height: '100%',
+        height: 600,
         width: '100%',
         flex: 1,
         flexDirection: 'row',

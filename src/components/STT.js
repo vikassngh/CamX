@@ -4,11 +4,10 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
-  TouchableHighlight,
-  ScrollView, TextInput,
+  ScrollView, TextInput, Pressable, TouchableOpacity,
 } from "react-native";
 import Voice from 'react-native-voice';
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const SpeechText = () => {
   const [pitch, setPitch] = useState('');
@@ -16,14 +15,12 @@ const SpeechText = () => {
   const [end, setEnd] = useState('');
   const [started, setStarted] = useState('');
   const [results, setResults] = useState([]);
-  const [partialResults, setPartialResults] = useState([]);
 
   useEffect(() => {
     Voice.onSpeechStart = onSpeechStart;
     Voice.onSpeechEnd = onSpeechEnd;
     Voice.onSpeechError = onSpeechError;
     Voice.onSpeechResults = onSpeechResults;
-    Voice.onSpeechPartialResults = onSpeechPartialResults;
     Voice.onSpeechVolumeChanged = onSpeechVolumeChanged;
 
     return () => {
@@ -43,17 +40,12 @@ const SpeechText = () => {
 
   const onSpeechError = (e) => {
     console.log('onSpeechError: ', e);
-    setError(JSON.stringify(e.error));
+    setError(JSON.stringify(e.error.message));
   };
 
   const onSpeechResults = (e) => {
     console.log('onSpeechResults: ', e);
     setResults(e.value);
-  };
-
-  const onSpeechPartialResults = (e) => {
-    console.log('onSpeechPartialResults: ', e);
-    setPartialResults(e.value);
   };
 
   const onSpeechVolumeChanged = (e) => {
@@ -68,7 +60,6 @@ const SpeechText = () => {
       setError('');
       setStarted('');
       setResults([]);
-      setPartialResults([]);
       setEnd('');
     } catch (e) {
       console.error(e);
@@ -78,14 +69,7 @@ const SpeechText = () => {
   const stopRecognizing = async () => {
     try {
       await Voice.stop();
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const cancelRecognizing = async () => {
-    try {
-      await Voice.cancel();
+      setEnd('√');
     } catch (e) {
       console.error(e);
     }
@@ -98,7 +82,6 @@ const SpeechText = () => {
       setError('');
       setStarted('');
       setResults([]);
-      setPartialResults([]);
       setEnd('');
     } catch (e) {
       console.error(e);
@@ -108,53 +91,33 @@ const SpeechText = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <Text style={styles.titleText}>
-          Speech to Text Conversion in React Native |
-          Voice Recognition
-        </Text>
-        <Text style={styles.textStyle}>
-          Press mike to start Recognition
-        </Text>
         <View style={styles.headerContainer}>
           <Text style={styles.textWithSpaceStyle}>
             {`Started: ${started}`}
           </Text>
           <Text style={styles.textWithSpaceStyle}>
-            {`End: ${end}`}
+            {`Pitch: \n ${pitch}`}
           </Text>
         </View>
         <View style={styles.headerContainer}>
           <Text style={styles.textWithSpaceStyle}>
-            {`Pitch: \n ${pitch}`}
+            {`Ended: ${end}`}
           </Text>
           <Text style={styles.textWithSpaceStyle}>
             {`Error: \n ${error}`}
           </Text>
         </View>
-        <TouchableHighlight onPress={startRecognizing}>
-          <Image
-            style={styles.imageButton}
-            source={{
-              uri:
-                'https://raw.githubusercontent.com/AboutReact/sampleresource/master/microphone.png',
-            }}
-          />
-        </TouchableHighlight>
-        <Text style={styles.textStyle}>
-          Partial Results
-        </Text>
-        <ScrollView>
-          {partialResults.map((result, index) => {
-            return (
-              <TextInput
-                key={`partial-result-${index}`}
-                style={styles.textStyle}>
-                {result}
-              </TextInput>
-            );
-          })}
-        </ScrollView>
-        <Text style={styles.textStyle}>
+        <Pressable onPressIn={startRecognizing} onPressOut={stopRecognizing} style={({ pressed }) => [
+          {
+            backgroundColor: pressed
+              ? 'black'
+              : 'red'
+          },
+          styles.button
+        ]}>
+          <Icon name="microphone" size={40} color={"white"}/>
+        </Pressable>
+        <Text style={styles.text}>
           Results
         </Text>
         <ScrollView style={{marginBottom: 42}}>
@@ -169,27 +132,9 @@ const SpeechText = () => {
           })}
         </ScrollView>
         <View style={styles.horizontalView}>
-          <TouchableHighlight
-            onPress={stopRecognizing}
-            style={styles.buttonStyle}>
-            <Text style={styles.buttonTextStyle}>
-              Stop
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={cancelRecognizing}
-            style={styles.buttonStyle}>
-            <Text style={styles.buttonTextStyle}>
-              Cancel
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={destroyRecognizer}
-            style={styles.buttonStyle}>
-            <Text style={styles.buttonTextStyle}>
-              Destroy
-            </Text>
-          </TouchableHighlight>
+          <TouchableOpacity style={styles.button2} onPress={destroyRecognizer}>
+            <Text style={styles.text2}>DESTROY</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
@@ -199,6 +144,21 @@ const SpeechText = () => {
 export default SpeechText;
 
 const styles = StyleSheet.create({
+  button2:{
+    width:100,
+    height:30,
+    backgroundColor:'red',
+    borderWidth: 1,
+    borderRadius:30,
+    margin:5,
+    textAlign:'center'
+  },
+  text2:{
+    color:'white',
+    fontSize: 16,
+    alignSelf:'center',
+    padding:3
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -207,8 +167,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 10,
+    paddingVertical:10,
   },
   titleText: {
     fontSize: 22,
@@ -234,16 +193,36 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   textStyle: {
+    padding: 3,
+    borderColor:'red',
+    borderWidth:1,
+    margin:10,
+    backgroundColor: 'dimgray'
+  },
+  text:{
     textAlign: 'center',
-    padding: 12,
+    margin:15,
+    fontSize: 20,
+    fontWeight: 'bold'
   },
   imageButton: {
     width: 50,
     height: 50,
   },
   textWithSpaceStyle: {
-    flex: 1,
-    textAlign: 'center',
+    flex:1,
+    textAlign:'center',
     color: '#B0171F',
+    fontSize:15,
+    fontWeight:'bold'
   },
+  button:{
+    height:60,
+    width:60,
+    borderRadius:40,
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf:'center',
+    marginVertical:10,
+  }
 });
