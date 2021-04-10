@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View, Image, ScrollView, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {SafeAreaView} from "react-native-safe-area-context/src/SafeAreaView";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {createPDF, mulHtml} from '../utils/helper';
+import {createPdf, mulHtml} from '../utils/helper';
 import * as ImagePicker from 'react-native-image-picker';
 
 export default class ImgToPdf extends React.Component {
@@ -43,7 +43,7 @@ export default class ImgToPdf extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.buttonR}
-                        // onPress={createPDF(mulHtml(photo))}
+                        onPress={createPdf(mulHtml(photo))}
                     >
                         <Icon name="check" size={50} color={"white"}/>
                     </TouchableOpacity>

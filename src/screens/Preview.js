@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context/src/SafeAreaView";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {createPDF, mulHtml} from '../utils/helper';
+import {createPdf, mulHtml} from '../utils/helper';
 
 export default function Preview({route, navigation}) {
 
@@ -31,7 +31,7 @@ export default function Preview({route, navigation}) {
             </ScrollView>
             <TouchableOpacity
                 style={styles.button}
-                // onPress={createPDF(mulHtml(photo))}
+                onPress={createPdf(mulHtml(photo))}
             >
                 <Icon name="check" size={50} color={"white"}/>
             </TouchableOpacity>

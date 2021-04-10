@@ -91,7 +91,7 @@ const actions = [
     buttonSize: 56,
     color:'black',
     icon: <Icon name="image" size={30} color={"white"}/>,
-    position: 1
+    position: 2
   },
   {
     text: "Speech to Text",
@@ -99,7 +99,7 @@ const actions = [
     buttonSize: 56,
     color:'black',
     icon: <Icon name="microphone" size={30} color={"white"}/>,
-    position: 2
+    position: 3
   },
   {
     text: "Text to Speech",
@@ -107,7 +107,7 @@ const actions = [
     buttonSize: 56,
     color:'black',
     icon: <Icon name="headphones" size={30} color={"white"}/>,
-    position: 3
+    position: 4
   },
   {
     text: "Scan Document",
@@ -115,7 +115,7 @@ const actions = [
     buttonSize: 56,
     color:'black',
     icon: <Icon name="camera" size={30} color={"white"}/>,
-    position: 4
+    position: 5
   }
 ];
 
