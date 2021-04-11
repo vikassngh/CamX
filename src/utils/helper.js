@@ -55,11 +55,11 @@ export const mulHtml = async (photo) => {
     }
 }
 
-export const createAndSavePDF = async (html) => {
+export const createAndSavePDF = async (html,input) => {
     try{
         let options = {
             html: html,
-            fileName: 'Test',
+            fileName: input,
             directory: 'Documents',
         };
 
@@ -70,11 +70,11 @@ export const createAndSavePDF = async (html) => {
     }
 }
 
-export const createPdf = (htmlFactory) => async () => {
+export const createPdf = (htmlFactory,input) => async () => {
     try {
         const html = await (htmlFactory || htmlFactory());
         if (html) {
-            await createAndSavePDF(html);
+            await createAndSavePDF(html,input);
             Alert.alert("Success!", "Document has been successfully saved!");
         }
     } catch (error) {
