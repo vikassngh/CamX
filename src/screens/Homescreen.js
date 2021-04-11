@@ -82,7 +82,7 @@ const actions = [
       name: "bt_textFromImage",
       buttonSize: 56,
       color:'black',
-      icon: <Icon name="image" size={30} color={"white"}/>,
+      icon: <Icon name="file-text-o" size={30} color={"white"}/>,
       position: 1
   },
   {

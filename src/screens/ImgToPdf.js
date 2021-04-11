@@ -57,6 +57,7 @@ export default class ImgToPdf extends React.Component {
         const options = {
             mediaType:'photo',
             includeBase64: true,
+            quality:0.1,
         }
         ImagePicker.launchImageLibrary(options, response => {
             if( response.didCancel === true){

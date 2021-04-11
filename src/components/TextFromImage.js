@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Button, StyleSheet, TextInput,Text, View, Image} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
-import ProgressCircle from 'react-native-progress/Circle';
 import TesseractOcr, {
   LANG_ENGLISH,
   useEventListener,

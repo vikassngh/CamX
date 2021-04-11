@@ -98,7 +98,7 @@ export default class Camera extends React.Component {
         const {navigation}=this.props
         if (this.camera) {
             const photo=this.state.photo;
-            const options = { quality: 1, base64: true };
+            const options = { quality: 0.1, base64: true };
             const img=await this.camera.takePictureAsync(options)
             photo.push(img)
             /*navigation.navigate('Edit',{
