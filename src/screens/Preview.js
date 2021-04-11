@@ -3,8 +3,11 @@ import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react
 import {SafeAreaView} from "react-native-safe-area-context/src/SafeAreaView";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {createPdf, mulHtml} from '../utils/helper';
+import Dialog from "react-native-dialog";
 
 export default function Preview({route, navigation}) {
+    const [shown,isShown] = React.useState(false)
+    const [input,setInput] = React.useState(undefined)
 
     const {photo} = route.params
 
@@ -28,10 +31,28 @@ export default function Preview({route, navigation}) {
                         </View>
                     ))}
                 </View>
+                <Dialog.Container visible={shown}>
+                    <Dialog.Title>Enter PDF Name</Dialog.Title>
+                    <Dialog.Description>
+                        Enter PDF Name (without .pdf extension):
+                    </Dialog.Description>
+                    <Dialog.Input label="Enter Input" onChangeText={(value)=>{setInput(value)}}/>
+                    <Dialog.Button label="Cancel" onPress={() => isShown(false)} />
+                    <Dialog.Button
+                        label="Done"
+                        onPress={()=>{
+                            isShown(false)
+                            if(input){
+                                console.log(input)
+                                createPdf(mulHtml(photo),input)
+                            }
+
+                        }}/>
+                </Dialog.Container>
             </ScrollView>
             <TouchableOpacity
                 style={styles.button}
-                onPress={createPdf(mulHtml(photo))}
+                onPress={() => {isShown(true)}}
             >
                 <Icon name="check" size={50} color={"white"}/>
             </TouchableOpacity>

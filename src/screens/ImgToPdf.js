@@ -4,14 +4,20 @@ import {SafeAreaView} from "react-native-safe-area-context/src/SafeAreaView";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {createPdf, mulHtml} from '../utils/helper';
 import * as ImagePicker from 'react-native-image-picker';
+import Dialog from 'react-native-dialog';
 
 export default class ImgToPdf extends React.Component {
     state = {
         photo: [],
+        input:'',
+        isDialogVisible: false,
+    }
+    showDialog(isShow){
+        this.setState({isDialogVisible: isShow});
     }
 
     render() {
-        const {photo} = this.state
+        const {photo,input,isDialogVisible} = this.state
         const {navigation} = this.props
         return (
             <SafeAreaView forceInset={{top: 'always'}}>
@@ -34,6 +40,17 @@ export default class ImgToPdf extends React.Component {
                         ))}
                     </View>
                 </ScrollView>
+                <Dialog.Container visible={isDialogVisible}>
+                    <Dialog.Title>Enter PDF Name</Dialog.Title>
+                    <Dialog.Input label="Enter Input" onChangeText={(value) => this.setState({input:value})}/>
+                    <Dialog.Button label="Cancel" onPress={() => {this.showDialog(false)}} />
+                    <Dialog.Button
+                        label="Done"
+                        onPress={()=>{
+                            this.showDialog(false)
+                            createPdf(mulHtml(photo),input)
+                        }}/>
+                </Dialog.Container>
                 <View style={styles.buttonView}>
                     <TouchableOpacity
                         style={styles.buttonL}
@@ -43,7 +60,12 @@ export default class ImgToPdf extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.buttonR}
-                        onPress={createPdf(mulHtml(photo))}
+                        onPress={() => {
+                            this.showDialog(true);
+                            if (!isDialogVisible){
+                                createPdf(mulHtml(photo),input);
+                            }
+                        }}
                     >
                         <Icon name="check" size={50} color={"white"}/>
                     </TouchableOpacity>
