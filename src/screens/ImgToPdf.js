@@ -10,14 +10,22 @@ export default class ImgToPdf extends React.Component {
     state = {
         photo: [],
         input:'',
-        isDialogVisible: false,
+        isVisible: false,
     }
     showDialog(isShow){
-        this.setState({isDialogVisible: isShow});
+        this.setState({isVisible: isShow});
+    }
+
+    async saveButton() {
+        const {photo,input,isVisible} = this.state
+        this.showDialog(true);
+        if (!isVisible){
+            await createPdf(mulHtml(photo),input);
+        }
     }
 
     render() {
-        const {photo,input,isDialogVisible} = this.state
+        const {photo,input,isVisible} = this.state
         const {navigation} = this.props
         return (
             <SafeAreaView forceInset={{top: 'always'}}>
@@ -40,16 +48,13 @@ export default class ImgToPdf extends React.Component {
                         ))}
                     </View>
                 </ScrollView>
-                <Dialog.Container visible={isDialogVisible}>
+                <Dialog.Container visible={isVisible}>
                     <Dialog.Title>Enter PDF Name</Dialog.Title>
                     <Dialog.Input label="Enter Input" onChangeText={(value) => this.setState({input:value})}/>
                     <Dialog.Button label="Cancel" onPress={() => {this.showDialog(false)}} />
                     <Dialog.Button
                         label="Done"
-                        onPress={()=>{
-                            this.showDialog(false)
-                            createPdf(mulHtml(photo),input)
-                        }}/>
+                        onPress={this.saveButton()}/>
                 </Dialog.Container>
                 <View style={styles.buttonView}>
                     <TouchableOpacity
@@ -60,12 +65,7 @@ export default class ImgToPdf extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.buttonR}
-                        onPress={() => {
-                            this.showDialog(true);
-                            if (!isDialogVisible){
-                                createPdf(mulHtml(photo),input);
-                            }
-                        }}
+                        onPress={}
                     >
                         <Icon name="check" size={50} color={"white"}/>
                     </TouchableOpacity>
@@ -81,14 +81,14 @@ export default class ImgToPdf extends React.Component {
             includeBase64: true,
             quality:0.1,
         }
-        ImagePicker.launchImageLibrary(options, response => {
+        await ImagePicker.launchImageLibrary(options, response => {
             if( response.didCancel === true){
                 return;
             } else {
                 photo.push(response);
+                this.setState({photo})
             }
         });
-        this.setState({photo})
     }
 
 }

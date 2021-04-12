@@ -51,7 +51,7 @@ export const mulHtml = async (photo) => {
         }
         return await createHTML({content:cont});
     } catch (e){
-        console.log(e);
+        console.warn(e);
     }
 }
 
@@ -62,20 +62,19 @@ export const createAndSavePDF = async (html,input) => {
             fileName: input,
             directory: 'Documents',
         };
-
-        let file = await RNHTMLtoPDF.convert(options)
-        console.log(file.filePath);
+        const file = await RNHTMLtoPDF.convert(options)
+        return file;
     }catch (e) {
-        console.log(e);
+        console.warn(e);
     }
 }
 
-export const createPdf = (htmlFactory,input) => async () => {
+export const createPdf = async (htmlFactory,input) => {
     try {
         const html = await (htmlFactory || htmlFactory());
         if (html) {
-            await createAndSavePDF(html,input);
-            Alert.alert("Success!", "Document has been successfully saved!");
+            const file = await createAndSavePDF(html,input);
+            Alert.alert("Success!", "Document has been successfully saved!\n"+"File Path:"+file.filePath);
         }
     } catch (error) {
         Alert.alert("Error", error.message || "Something went wrong...");

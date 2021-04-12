@@ -11,6 +11,14 @@ export default function Preview({route, navigation}) {
 
     const {photo} = route.params
 
+    const saveButton = async ()=>{
+        isShown(false)
+        if(input){
+            await createPdf(mulHtml(photo),input)
+            console.log(input)
+        }
+    }
+
     return (
         <SafeAreaView forceInset={{top:'always'}}>
             <ScrollView style={{height:'90%'}}>
@@ -40,14 +48,7 @@ export default function Preview({route, navigation}) {
                     <Dialog.Button label="Cancel" onPress={() => isShown(false)} />
                     <Dialog.Button
                         label="Done"
-                        onPress={()=>{
-                            isShown(false)
-                            if(input){
-                                console.log(input)
-                                createPdf(mulHtml(photo),input)
-                            }
-
-                        }}/>
+                        onPress={saveButton()}/>
                 </Dialog.Container>
             </ScrollView>
             <TouchableOpacity
