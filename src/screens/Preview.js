@@ -11,14 +11,6 @@ export default function Preview({route, navigation}) {
 
     const {photo} = route.params
 
-    const saveButton = async ()=>{
-        isShown(false)
-        if(input){
-            await createPdf(mulHtml(photo),input)
-            console.log(input)
-        }
-    }
-
     return (
         <SafeAreaView forceInset={{top:'always'}}>
             <ScrollView style={{height:'90%'}}>
@@ -40,15 +32,28 @@ export default function Preview({route, navigation}) {
                     ))}
                 </View>
                 <Dialog.Container visible={shown}>
-                    <Dialog.Title>Enter PDF Name</Dialog.Title>
-                    <Dialog.Description>
-                        Enter PDF Name (without .pdf extension):
-                    </Dialog.Description>
-                    <Dialog.Input label="Enter Input" onChangeText={(value)=>{setInput(value)}}/>
-                    <Dialog.Button label="Cancel" onPress={() => isShown(false)} />
+                    <Dialog.Title>Enter PDF Name (without .pdf extension):</Dialog.Title>
+                    <Dialog.Input
+                        placeholder="Enter Input"
+                        style={{fontSize:18}}
+                        onChangeText={(value)=>{setInput(value)}}
+                    />
+                    <Dialog.Button
+                        label="Cancel"
+                        style={{fontSize:18}}
+                        onPress={() => isShown(false)} />
                     <Dialog.Button
                         label="Done"
-                        onPress={saveButton()}/>
+                        style={{fontSize:18}}
+                        onPress={async () => {
+                            isShown(false);
+                            if(input){
+                                await createPdf(mulHtml(photo),input)
+                                navigation.navigate('Camera',{
+                                    photo:[],
+                                })
+                            }
+                        }}/>
                 </Dialog.Container>
             </ScrollView>
             <TouchableOpacity

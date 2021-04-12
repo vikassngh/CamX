@@ -74,10 +74,9 @@ export const createPdf = async (htmlFactory,input) => {
         const html = await (htmlFactory || htmlFactory());
         if (html) {
             const file = await createAndSavePDF(html,input);
-            Alert.alert("Success!", "Document has been successfully saved!\n"+"File Path:"+file.filePath);
+            Alert.alert("Success!", "Document has been successfully saved!\n\n File Path:"+file.filePath);
         }
     } catch (error) {
         Alert.alert("Error", error.message || "Something went wrong...");
     }
-    // return []
 };

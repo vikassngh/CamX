@@ -3,7 +3,7 @@ import {StatusBar, StyleSheet, View, SafeAreaView, TouchableOpacity} from 'react
 import {CropView} from 'react-native-image-crop-tools';
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-function Edit({route,navigation}) {
+export default function Edit({route,navigation}) {
   const {photo,idx} = route.params;
   const [uri, setUri] = useState();
   const cropViewRef = useRef();
@@ -21,9 +21,16 @@ function Edit({route,navigation}) {
               style={{marginVertical:30,marginLeft:325}}
               onPress={()=>{
                 photo.splice(idx,1);
-                navigation.navigate('Preview',{
-                  photo:photo
-                });
+                if(photo[0]){
+                    navigation.navigate('Preview',{
+                        photo:photo
+                    });
+                } else {
+                    navigation.navigate('Camera',{
+                        photo:photo
+                    });
+                }
+
               }}
           >
             <Icon name="delete-outline" size={42} color={"orangered"}/>
@@ -86,5 +93,3 @@ const styles = StyleSheet.create({
     flexDirection:"row",
   }
 });
-
-export default Edit;

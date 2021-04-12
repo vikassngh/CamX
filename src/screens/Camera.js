@@ -5,9 +5,12 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import {SafeAreaView} from "react-native-safe-area-context/src/SafeAreaView";
 
 export default class Camera extends React.Component {
-    state = {
-        flashMode: RNCamera.Constants.FlashMode.off,
-        photo:[],
+    constructor(props) {
+        super(props);
+        this.state = {
+            flashMode: RNCamera.Constants.FlashMode.off,
+            photo:props.route.params.photo,
+        }
     }
 
     render() {
@@ -16,7 +19,6 @@ export default class Camera extends React.Component {
             flashMode
         } = this.state
         const {navigation}=this.props
-
         return (
             <SafeAreaView forceInset={{top:'always'}} style={{flex:1,backgroundColor: "black"}}>
                 <StatusBar hidden={true}/>
@@ -66,7 +68,7 @@ export default class Camera extends React.Component {
                               height:80,width:80,
                               backgroundColor: 'black'}}
                           onPress={() => {
-                              navigation.navigate('Preview',{
+                              photo[0] && navigation.navigate('Preview',{
                                   photo:photo
                               });
                           }}>
@@ -78,15 +80,15 @@ export default class Camera extends React.Component {
                           style={styles.shutterButton}
                           onPress={this.takePicture}
                         />
-                        <TouchableOpacity
-                          style={{marginVertical:10,marginHorizontal:35}}
-                          onPress={() => {
-                              navigation.navigate('Preview',{
-                                  photo:photo
-                              });
-                          }}>
-                            <Icon name="check-box" size={60} color={"deepskyblue"}/>
-                        </TouchableOpacity>
+                        {photo[0] && <TouchableOpacity
+                            style={{marginVertical: 10, marginHorizontal: 35}}
+                            onPress={() => {
+                                navigation.navigate('Preview', {
+                                    photo: photo,
+                                });
+                            }}>
+                            <Icon name="check-box" size={60} color={'deepskyblue'}/>
+                        </TouchableOpacity>}
                     </View>
                 </View>
             </SafeAreaView>
@@ -148,7 +150,6 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        justifyContent: 'center',
     },
     shutterButton:{
         height:80,
