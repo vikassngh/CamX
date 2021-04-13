@@ -37,8 +37,8 @@ export default function HomeScreen({navigation}) {
   return (
     <SafeAreaView forceInset={{top:'always'}}>
       <ScrollView style={{height:"100%"}}>
-        <View style={{height:650}}>
-          <View style={{height:650,backgroundColor:'red'}}>
+        <View style={{height:height/1.08}}>
+          <View style={{height:height,backgroundColor:'red'}}>
             <View style={styles.mainBody}>
               <TouchableOpacity
                 style={styles.buttonStyle}

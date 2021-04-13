@@ -55,6 +55,7 @@ export const mulHtml = async (photo) => {
     }
 }
 
+
 export const createAndSavePDF = async (html,input) => {
     try{
         let options = {
@@ -62,7 +63,7 @@ export const createAndSavePDF = async (html,input) => {
             fileName: input,
             directory: 'Documents',
         };
-        const file = await RNHTMLtoPDF.convert(options)
+        const file = await RNHTMLtoPDF.convert(options);
         return file;
     }catch (e) {
         console.warn(e);
