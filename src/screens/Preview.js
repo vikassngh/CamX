@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context/src/SafeAreaView";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {createPdf, mulHtml} from '../utils/helper';
+import {createPdf, mulHtml, randomColor} from '../utils/helper';
 import Dialog from "react-native-dialog";
 
 export default function Preview({route, navigation}) {
@@ -13,7 +13,7 @@ export default function Preview({route, navigation}) {
 
     return (
         <SafeAreaView forceInset={{top:'always'}}>
-            <ScrollView style={{height:'90%'}}>
+            <ScrollView style={{height:'90%',}}>
                 <View style={styles.prev}>
                     {photo.map((value, idx) => (
                         <TouchableOpacity
@@ -82,28 +82,36 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        margin: '1%',
+        margin: '2%',
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf:'center',
     },
     cardPrev: {
-        backgroundColor:'deepskyblue',
+        backgroundColor:randomColor(),
         borderWidth:5,
         borderColor:'white',
-        borderRadius:20,
+        borderRadius:10,
         paddingVertical:'1%',
+        margin: '1%',
     },
     photo: {
-        width: 169,
-        height: 230,
+        width: 159,
+        height: 215,
         resizeMode: 'contain',
         alignSelf:'center',
         margin: '2%',
-        borderRadius:10,
+        borderRadius:5,
     },
     Index: {
-        fontSize:20,
+        fontSize:22,
+        width:'92%',
+        backgroundColor:'white',
+        fontWeight:'bold',
+        fontFamily:'mono',
+        textAlign:'center',
         alignSelf:'center',
+        borderRadius:5,
+        margin:'2%',
     },
 });

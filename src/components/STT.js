@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import Voice from 'react-native-voice';
 import Icon from "react-native-vector-icons/FontAwesome";
+import {randomColor} from '../utils/helper';
 
 const SpeechText = () => {
   const [pitch, setPitch] = useState('');
@@ -89,43 +90,45 @@ const SpeechText = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView forceInset={{top: 'always'}}>
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Text style={styles.textWithSpaceStyle}>
             {`Started: ${started}`}
           </Text>
           <Text style={styles.textWithSpaceStyle}>
-            {`Pitch: \n ${pitch}`}
+            {`Ended: ${end}`}
           </Text>
         </View>
         <View style={styles.headerContainer}>
           <Text style={styles.textWithSpaceStyle}>
-            {`Ended: ${end}`}
+            {`Pitch: \n ${pitch}`}
           </Text>
           <Text style={styles.textWithSpaceStyle}>
             {`Error: \n ${error}`}
           </Text>
         </View>
-        <View style={styles.horizontalView}>
-          <TouchableOpacity style={styles.button2} onPress={destroyRecognizer}>
-            <Text style={styles.text2}>RESET</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.button2} onPress={destroyRecognizer}>
+          <Text style={styles.text2}>RESET</Text>
+        </TouchableOpacity>
+        <View style={styles.resultView}>
+          <Text style={styles.text}>
+            Results
+          </Text>
+          <View style={styles.result}>
+            <ScrollView>
+              {results.map((result, index) => {
+                return (
+                    <TextInput
+                        key={`result-${index}`}
+                        style={styles.textStyle}>
+                      {result}
+                    </TextInput>
+                );
+              })}
+            </ScrollView>
+          </View>
         </View>
-        <Text style={styles.text}>
-          Results
-        </Text>
-        <ScrollView style={{marginBottom: 42}}>
-          {results.map((result, index) => {
-            return (
-              <TextInput
-                key={`result-${index}`}
-                style={styles.textStyle}>
-                {result}
-              </TextInput>
-            );
-          })}
-        </ScrollView>
         <Pressable onPressIn={startRecognizing} onPressOut={stopRecognizing} style={({ pressed }) => [
           {
             backgroundColor: pressed
@@ -134,7 +137,7 @@ const SpeechText = () => {
           },
           styles.button
         ]}>
-          <Icon name="microphone" size={40} color={"white"}/>
+          <Icon name="microphone" size={50} color={"white"}/>
         </Pressable>
       </View>
     </SafeAreaView>
@@ -144,52 +147,67 @@ const SpeechText = () => {
 export default SpeechText;
 
 const styles = StyleSheet.create({
-  button2:{
-    width:100,
-    height:30,
-    backgroundColor:'black',
-    borderWidth: 1,
-    borderRadius:30,
-    margin:5,
-    textAlign:'center'
-  },
-  text2:{
-    color:'white',
-    fontSize: 16,
-    alignSelf:'center',
-    padding:3,
-    fontWeight:'bold'
-  },
   container: {
-    flex: 1,
-    flexDirection: 'column',
     alignItems: 'center',
-    padding: 5,
+    height:'100%',
+    margin:'2%',
   },
   headerContainer: {
     flexDirection: 'row',
-    paddingVertical:10,
+    paddingVertical:'5%',
+    backgroundColor:'white',
+    margin:'1%',
+    borderRadius:10,
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf:'center',
   },
-  titleText: {
+  textWithSpaceStyle: {
+    flex:1,
+    textAlign:'center',
+    color: '#B0171F',
+    fontSize:18,
+    fontWeight:'bold',
+  },
+  button2:{
+    width:'30%',
+    height:'6%',
+    backgroundColor:'black',
+    borderWidth: 1,
+    borderRadius:20,
+    margin: '2%',
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf:'center',
+  },
+  text2:{
+    color:'white',
+    fontSize: 18,
+    alignSelf:'center',
+    fontWeight:'bold'
+  },
+  resultView: {
+    height:'50%',
+    backgroundColor:randomColor(),
+    width:'100%',
+    borderRadius:10,
+  },
+  text:{
+    textAlign: 'center',
+    margin:'2%',
     fontSize: 22,
-    textAlign: 'center',
     fontWeight: 'bold',
+    backgroundColor:'white',
+    width:'96%',
+    borderRadius:5,
+    alignSelf:'center',
   },
-  buttonStyle: {
-    flex: 1,
-    justifyContent: 'center',
-    marginTop: 15,
-    padding: 10,
-    backgroundColor: '#8ad24e',
-    marginRight: 2,
-    marginLeft: 2,
-  },
-  buttonTextStyle: {
-    color: '#fff',
-    textAlign: 'center',
-  },
-  horizontalView: {
-    flexDirection: 'row',
+  result: {
+    height:'85%',
+    backgroundColor:'white',
+    width:'96%',
+    borderRadius:10,
+    alignSelf:'center',
   },
   textStyle: {
     padding: 3,
@@ -198,30 +216,14 @@ const styles = StyleSheet.create({
     margin:10,
     backgroundColor: '#ad9f9e'
   },
-  text:{
-    textAlign: 'center',
-    margin:15,
-    fontSize: 20,
-    fontWeight: 'bold'
-  },
-  imageButton: {
-    width: 50,
-    height: 50,
-  },
-  textWithSpaceStyle: {
-    flex:1,
-    textAlign:'center',
-    color: '#B0171F',
-    fontSize:15,
-    fontWeight:'bold'
-  },
   button:{
-    height:60,
-    width:60,
+    height:80,
+    width:80,
+    backgroundColor:'black',
     borderRadius:40,
     justifyContent:'center',
     alignItems:'center',
     alignSelf:'center',
-    marginVertical:10,
+    marginVertical:'3%',
   }
 });

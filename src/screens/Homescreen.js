@@ -3,6 +3,7 @@ import FileViewer from 'react-native-file-viewer';
 import DocumentPicker from 'react-native-document-picker';
 import {ScrollView, View, SafeAreaView, Dimensions, StyleSheet, Text, TouchableOpacity} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {randomColor} from '../utils/helper';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -102,7 +103,6 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection:'row',
     flexWrap:'wrap',
-
     width:'100%',
     height:height,
   },
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     borderRadius: 30,
     borderColor: 'white',
-    backgroundColor:'red',
+    backgroundColor:randomColor(),
     justifyContent:'center',
     alignSelf:'center',
     alignItems: 'center',
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     borderRadius: 30,
     borderColor: 'white',
-    backgroundColor:'deepskyblue',
+    backgroundColor:randomColor(),
     justifyContent:'center',
     alignSelf:'center',
     alignItems: 'center',

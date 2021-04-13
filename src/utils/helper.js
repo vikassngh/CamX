@@ -81,3 +81,15 @@ export const createPdf = async (htmlFactory,input) => {
         Alert.alert("Error", error.message || "Something went wrong...");
     }
 };
+
+const bgC=['orangered','deepskyblue','#F93822FF',
+    '#5F4B8BFF','#00A4CCFF','#F95700FF','#00203FFF',
+    '#ED2B33FF','#2C5F2D','#EEA47FFF','#212017',
+    '#2BAE66FF','#6E6E6DFF','#DAA03DFF', '#990011FF',
+    '#FDD20EFF','#006B38FF','#FFD662FF','#00539CFF',
+    '#FFA177FF','#DF6589FF','#9E1030FF','#4B878BFF',
+    '#5CDB95','#3500D3','#5AB9EA','#00887A']
+
+export const randomColor = () => {
+    return bgC[Math.floor(Math.random() * bgC.length)]
+}

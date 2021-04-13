@@ -191,7 +191,7 @@ export default function TextToSpeech({navigation}) {
             extraData={selectedVoice}
             data={voices}
           />
-          <TouchableOpacity style={styles.button2} onPress={() => setModalVisible(false)}>
+          <TouchableOpacity style={styles.button} onPress={() => setModalVisible(false)}>
             <Text style={styles.text}>DONE</Text>
           </TouchableOpacity>
         </Modal>
@@ -210,7 +210,7 @@ export default function TextToSpeech({navigation}) {
             title="Press to hear some words"
             style={styles.speak}
             onPress={playing? stopText: readText}>
-          <Icon name="volume-high" size={40} color={"white"}/>
+          <Icon name="volume-high" size={60} color={"white"}/>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -239,45 +239,45 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 300,
-    padding: 5,
-    fontSize:16,
-    fontWeight:'bold'
+    alignSelf:'center',
+    width: '100%',
+    padding: 10,
+    fontSize:18,
+    fontWeight:'bold',
+    backgroundColor:'white',
+    margin:'1%',
+    borderRadius:10,
   },
   sliderLabel: {
     textAlign: 'center',
     marginRight: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize:18,
   },
   slider: {
     flex: 1,
-    backgroundColor:'transparent'
   },
   textInput: {
     borderColor: 'black',
-    borderWidth: 1,
+    borderWidth: 2,
+    borderRadius:20,
     color: 'black',
     width: '100%',
+    fontSize:18,
     height:300,
+    backgroundColor:'white',
   },
   button:{
-    width:150,
-    height:26,
+    width:'40%',
+    height:'7%',
     backgroundColor:'black',
     borderWidth: 1,
     borderRadius:20,
     marginTop: 5,
-    marginBottom: 20
-  },
-  button2:{
-    width:100,
-    height:40,
-    backgroundColor:'black',
-    borderWidth: 1,
-    borderRadius:25,
-    alignSelf: 'center',
-    marginTop: 15,
-    marginBottom: 15
+    marginBottom: 20,
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf:'center',
   },
   text:{
     color:'white',
@@ -286,17 +286,17 @@ const styles = StyleSheet.create({
   },
   text2:{
     color:'white',
-    fontSize: 16,
+    fontSize: 19,
     alignSelf:'center'
   },
   speak:{
-    height:60,
-    width:60,
+    height:80,
+    width:80,
     backgroundColor:'black',
     borderRadius:40,
     justifyContent:'center',
     alignItems:'center',
     alignSelf:'center',
-    marginVertical:40
+    marginVertical:20
   },
 });

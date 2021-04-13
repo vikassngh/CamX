@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View, Image, ScrollView, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {SafeAreaView} from "react-native-safe-area-context/src/SafeAreaView";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {createPdf, mulHtml} from '../utils/helper';
+import {createPdf, mulHtml, randomColor} from '../utils/helper';
 import * as ImagePicker from 'react-native-image-picker';
 import Dialog from 'react-native-dialog';
 
@@ -21,20 +21,27 @@ export default class ImgToPdf extends React.Component {
                 <ScrollView style={{height: '90%'}}>
                     <View style={styles.prev}>
                         {photo.map((value, idx) => (
-                            <View>
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        navigation.navigate('EDIT', {
-                                            photo: photo,
-                                            idx: idx
-                                        });
-                                    }}
-                                >
-                                    {photo[idx] && <Image style={styles.photo} key={idx} source={photo[idx]}/>}
-                                </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.cardPrev}
+                                onPress={() => {
+                                    navigation.navigate('EDIT', {
+                                        photo: photo,
+                                        idx: idx
+                                    });
+                                }}
+                            >
+                                {photo[idx] && <Image style={styles.photo} key={idx} source={photo[idx]}/>}
                                 <Text style={styles.Index}>{idx + 1}</Text>
-                            </View>
+                            </TouchableOpacity>
                         ))}
+                        <TouchableOpacity
+                            style={styles.addButton}
+                            onPress={this.addImg()}
+                        >
+                            <View style={{backgroundColor:'rgba(110,110,109,0.7)',borderRadius:50}}>
+                                <Icon name="add" size={70} color={"white"}/>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
                 <Dialog.Container visible={isVisible}>
@@ -58,20 +65,12 @@ export default class ImgToPdf extends React.Component {
                             }
                         }}/>
                 </Dialog.Container>
-                <View style={styles.buttonView}>
-                    <TouchableOpacity
-                        style={styles.buttonL}
-                        onPress={this.addImg()}
-                    >
-                        <Icon name="add" size={50} color={"white"}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.buttonR}
-                        onPress={() => this.setState({isVisible: true})}
-                    >
-                        <Icon name="check" size={50} color={"white"}/>
-                    </TouchableOpacity>
-                </View>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => {isShown(true)}}
+                >
+                    <Icon name="check" size={50} color={"white"}/>
+                </TouchableOpacity>
             </SafeAreaView>
         );
     }
@@ -81,7 +80,7 @@ export default class ImgToPdf extends React.Component {
         const options = {
             mediaType:'photo',
             includeBase64: true,
-            quality:0.1,
+            quality:0.2,
         }
         await ImagePicker.launchImageLibrary(options, response => {
             if( response.didCancel === true){
@@ -96,39 +95,6 @@ export default class ImgToPdf extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    buttonView: {
-        flexDirection:'row',
-        backgroundColor:'transparent',
-        width:'100%',
-        height:'10%',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    buttonL: {
-        height: '90%',
-        width: '15%',
-        borderStyle:'solid',
-        borderWidth: 2,
-        borderRadius: 10,
-        borderColor:'white',
-        backgroundColor:'black',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginRight:'30%'
-
-    },
-    buttonR: {
-        height: '90%',
-        width: '15%',
-        borderStyle:'solid',
-        borderWidth: 2,
-        borderRadius: 10,
-        borderColor:'white',
-        backgroundColor:'black',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft:'30%'
-    },
     prev: {
         height: '100%',
         width: '100%',
@@ -136,17 +102,60 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         margin: '2%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf:'center',
+    },
+    addButton: {
+        width: 179,
+        height: 235,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf:'center',
+        backgroundColor:'rgba(110,110,109,0.4)',
+        borderWidth:5,
+        borderColor:'white',
+        borderRadius:10,
+        paddingVertical:'1%',
+        margin: '1%',
+    },
+    cardPrev: {
+        backgroundColor:randomColor(),
+        borderWidth:5,
+        borderColor:'white',
+        borderRadius:10,
+        paddingVertical:'1%',
+        margin: '1%',
     },
     photo: {
-        backgroundColor: '#fff',
-        width: 173,
-        height: 230,
+        width: 159,
+        height: 215,
         resizeMode: 'contain',
+        alignSelf:'center',
         margin: '2%',
+        borderRadius:5,
     },
     Index: {
-        fontSize: 18,
-        textAlign: 'center',
-        right: 10
+        fontSize:22,
+        width:'92%',
+        backgroundColor:'white',
+        fontWeight:'bold',
+        fontFamily:'mono',
+        textAlign:'center',
+        alignSelf:'center',
+        borderRadius:5,
+        margin:'2%',
+    },
+    button:{
+        alignSelf: 'center',
+        height: '10%',
+        width: '100%',
+        backgroundColor: 'black',
+        borderStyle:'solid',
+        borderWidth: 4,
+        borderRadius: 15,
+        borderColor:'white',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
