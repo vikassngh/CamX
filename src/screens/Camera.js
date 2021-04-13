@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Platform, Image, TouchableOpacity, Alert, StatusBar } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity, StatusBar } from "react-native";
 import { RNCamera } from 'react-native-camera';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {SafeAreaView} from "react-native-safe-area-context/src/SafeAreaView";

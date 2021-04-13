@@ -16,19 +16,18 @@ export default function Preview({route, navigation}) {
             <ScrollView style={{height:'90%'}}>
                 <View style={styles.prev}>
                     {photo.map((value, idx) => (
-                        <View>
-                            <TouchableOpacity
-                                onPress={() => {
-                                    navigation.navigate('Edit',{
-                                        photo:photo,
-                                        idx:idx
-                                    });
-                                }}
-                            >
-                                {photo && <Image style={styles.photo} key={idx} source={photo[idx]}/>}
-                            </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.cardPrev}
+                            onPress={() => {
+                                navigation.navigate('Edit',{
+                                    photo:photo,
+                                    idx:idx
+                                });
+                            }}
+                        >
+                            {photo && <Image style={styles.photo} key={idx} source={photo[idx]}/>}
                             <Text style={styles.Index}>{idx+1}</Text>
-                        </View>
+                        </TouchableOpacity>
                     ))}
                 </View>
                 <Dialog.Container visible={shown}>
@@ -49,9 +48,7 @@ export default function Preview({route, navigation}) {
                             isShown(false);
                             if(input){
                                 await createPdf(mulHtml(photo),input)
-                                navigation.navigate('Camera',{
-                                    photo:[],
-                                })
+                                navigation.navigate('Home')
                             }
                         }}/>
                 </Dialog.Container>
@@ -85,18 +82,28 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        margin: '2%',
+        margin: '1%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf:'center',
+    },
+    cardPrev: {
+        backgroundColor:'deepskyblue',
+        borderWidth:5,
+        borderColor:'white',
+        borderRadius:20,
+        paddingVertical:'1%',
     },
     photo: {
-        backgroundColor: '#fff',
-        width: 173,
+        width: 169,
         height: 230,
         resizeMode: 'contain',
+        alignSelf:'center',
         margin: '2%',
+        borderRadius:10,
     },
     Index: {
-        fontSize:18,
-        textAlign:'center',
-        right:10
+        fontSize:20,
+        alignSelf:'center',
     },
 });

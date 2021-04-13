@@ -20,7 +20,7 @@ export default function App() {
       <StatusBar barStyle="dark-content" backgroundColor="white"/>
       <Stack.Navigator initialRouteName={'Home'}>
         <Stack.Screen name="Home" component={HomeScreen} options={{
-          title: 'Recents',
+          title: 'CamX',
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           headerStyle:{
             backgroundColor:'white'
