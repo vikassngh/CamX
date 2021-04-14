@@ -12,11 +12,15 @@ import Edit from './src/components/Edit';
 import ImgToPdf from './src/screens/ImgToPdf';
 import TFI from './src/components/TextFromImage';
 import {randomColor} from './src/utils/helper';
+import SplashScreen from 'react-native-splash-screen';
 
 const Stack = createStackNavigator();
 
 export default function App() {
     const bg = randomColor();
+    React.useEffect(()=>{
+        SplashScreen.hide();
+      },[]);
     return (
         <NavigationContainer>
             <StatusBar barStyle="dark-content" backgroundColor={bg}/>

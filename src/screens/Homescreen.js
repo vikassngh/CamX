@@ -5,7 +5,6 @@ import {View, SafeAreaView, Dimensions, StyleSheet, Text, TouchableOpacity} from
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {randomColor} from '../utils/helper';
 
-const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
 export default function HomeScreen({navigation}) {
@@ -16,7 +15,6 @@ export default function HomeScreen({navigation}) {
             });
             if (res) {
                 let uri = res.uri;
-                console.log('URI : ' + uri);
                 FileViewer.open(uri)
                     .then(() => {
                         console.log('Success');
@@ -108,9 +106,9 @@ const styles = StyleSheet.create({
     },
     wideButton: {
         width: '90%',
-        height: height / 4.8,
+        height: height / 5,
         marginHorizontal: '5%',
-        marginVertical: '2.5%',
+        marginVertical: '2%',
         borderWidth: 5,
         borderRadius: 30,
         borderColor: 'white',
@@ -121,7 +119,7 @@ const styles = StyleSheet.create({
     button: {
         width: '42%',
         height: height / 4.6,
-        marginBottom:'2.5%',
+        marginBottom:'2%',
         borderWidth: 5,
         borderRadius: 30,
         borderColor: 'white',
