@@ -50,7 +50,7 @@ export default function Preview({route, navigation}) {
                             isShown(false);
                             if (input) {
                                 await createPdf(mulHtml(photo), input);
-                                navigation.navigate('Home');
+                                navigation.popToTop();
                             }
                         }}/>
                 </Dialog.Container>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, SafeAreaView} from 'react-native';
+import {StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import TesseractOcr, {LANG_ENGLISH, useEventListener} from 'react-native-tesseract-ocr';
 import Clipboard from '@react-native-clipboard/clipboard';
@@ -76,7 +76,11 @@ export default function TFI() {
                         {isLoading ? (<Text>Loading....</Text>) : (
                             <ScrollView>
                                 <TouchableOpacity
-                                    onPress={() => Clipboard.setString(text)}
+                                    onPress={() => {
+                                        Clipboard.setString(text);
+                                        Alert.alert('Copy Successful',
+                                            'The text has been copied to clipboard.');
+                                    }}
                                     style={styles.textStyle}
                                     >
                                     <Text>{text}</Text>
@@ -113,13 +117,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
+        padding:'2%',
+
     },
     image: {
         height: '100%',
         width: '100%',
         resizeMode:'contain',
         alignSelf: 'center',
-        margin: '2%',
+        borderRadius: 5,
     },
     resultView: {
         height: '50%',
@@ -149,7 +155,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderColor: 'black',
         borderWidth: 1,
-        backgroundColor: 'gray',
         color: 'black',
     },
     options: {

@@ -32,12 +32,11 @@ export default class ImgToPdf extends React.Component {
                 <SafeAreaView forceInset={{top: 'always'}}>
                     <ScrollView style={{height: '90%'}}>
                         <View style={styles.prev}>
-                            {this.add()}
                             {photo.map((value, idx) => (
                                 <TouchableOpacity
                                     style={styles.cardPrev}
                                     onPress={() => {
-                                        navigation.navigate('EDIT', {
+                                        navigation.navigate('Edit', {
                                             photo: photo,
                                             idx: idx,
                                         });

@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, StyleSheet, Text,
-    View, ScrollView, Pressable, TouchableOpacity,} from 'react-native';
+import {
+    SafeAreaView, StyleSheet, Text,
+    View, ScrollView, Pressable, TouchableOpacity, Alert,
+} from 'react-native';
 import Voice from 'react-native-voice';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {randomColor} from '../utils/helper';
@@ -117,7 +119,11 @@ const SpeechText = () => {
                                 return (
                                     <TouchableOpacity
                                         key={`result-${index}`}
-                                        onPress={() => Clipboard.setString(result)}
+                                        onPress={() => {
+                                            Clipboard.setString(result);
+                                            Alert.alert('Copy Successful',
+                                                'The text has been copied to clipboard.');
+                                        }}
                                         style={styles.textStyle}>
                                         {result}
                                     </TouchableOpacity>
@@ -209,6 +215,9 @@ const styles = StyleSheet.create({
     textStyle: {
         margin: '2%',
         alignSelf: 'center',
+        borderColor: 'black',
+        borderWidth: 1,
+        color: 'black',
     },
     button: {
         height: 80,
