@@ -12,6 +12,7 @@ const defaultPickerOptions = {
     height: DEFAULT_HEIGHT,
     width: DEFAULT_WITH,
 };
+const bg = randomColor();
 
 export default function TFI() {
     const [isLoading, setIsLoading] = useState(false);
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     },
     resultView: {
         height: '50%',
-        backgroundColor: randomColor(),
+        backgroundColor: bg,
         width: '100%',
         borderRadius: 10,
     },
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
     button: {
         width: '30%',
         height: '80%',
-        backgroundColor: 'black',
+        backgroundColor: bg,
         borderWidth: 1,
         borderRadius: 10,
         marginHorizontal: '10%',

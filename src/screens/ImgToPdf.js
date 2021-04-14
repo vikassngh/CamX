@@ -176,8 +176,8 @@ const styles = StyleSheet.create({
     button: {
         alignSelf: 'center',
         height: '10%',
-        width: '100%',
-        backgroundColor: 'black',
+        width: '95%',
+        backgroundColor: randomColor(),
         borderStyle: 'solid',
         borderWidth: 4,
         borderRadius: 15,

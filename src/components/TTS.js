@@ -7,6 +7,9 @@ import {Slider} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Tts from 'react-native-tts';
 import {useFocusEffect} from '@react-navigation/native';
+import { randomColor } from "../utils/helper";
+
+const bg =randomColor();
 
 export default function TextToSpeech({navigation}) {
     const [voices, setVoices] = useState([]);
@@ -158,7 +161,7 @@ export default function TextToSpeech({navigation}) {
                         minimumValue={0.01}
                         maximumValue={0.99}
                         onValueChange={updateSpeechRate}
-                        thumbStyle={{height: 20, width: 20, backgroundColor: 'black'}}
+                        thumbStyle={{height: 20, width: 20, backgroundColor: randomColor()}}
                     />
                 </View>
                 <View style={styles.sliderContainer}>
@@ -171,7 +174,7 @@ export default function TextToSpeech({navigation}) {
                         minimumValue={0.01}
                         maximumValue={0.99}
                         onValueChange={updateSpeechPitch}
-                        thumbStyle={{height: 20, width: 20, backgroundColor: 'black'}}
+                        thumbStyle={{height: 20, width: 20, backgroundColor: randomColor()}}
                     />
                 </View>
                 <Text style={styles.sliderContainer}>
@@ -259,7 +262,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     textInput: {
-        borderColor: 'black',
+        borderColor: bg,
         borderWidth: 2,
         borderRadius: 20,
         color: 'black',
@@ -271,7 +274,7 @@ const styles = StyleSheet.create({
     button: {
         width: '40%',
         height: '7%',
-        backgroundColor: 'black',
+        backgroundColor: bg,
         borderWidth: 1,
         borderRadius: 20,
         marginTop: 5,
@@ -293,7 +296,7 @@ const styles = StyleSheet.create({
     speak: {
         height: 80,
         width: 80,
-        backgroundColor: 'black',
+        backgroundColor: bg,
         borderRadius: 40,
         justifyContent: 'center',
         alignItems: 'center',

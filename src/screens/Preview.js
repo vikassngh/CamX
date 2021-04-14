@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { Image, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import {SafeAreaView} from 'react-native-safe-area-context/src/SafeAreaView';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {createPdf, mulHtml, randomColor} from '../utils/helper';
@@ -13,6 +13,7 @@ export default function Preview({route, navigation}) {
 
     return (
         <SafeAreaView forceInset={{top: 'always'}}>
+            <StatusBar hidden={false}/>
             <ScrollView style={{height: '90%'}}>
                 <View style={styles.prev}>
                     {photo.map((value, idx) => (
@@ -71,8 +72,8 @@ const styles = StyleSheet.create({
     button: {
         alignSelf: 'center',
         height: '10%',
-        width: '100%',
-        backgroundColor: 'black',
+        width: '95%',
+        backgroundColor: randomColor(),
         borderStyle: 'solid',
         borderWidth: 4,
         borderRadius: 15,

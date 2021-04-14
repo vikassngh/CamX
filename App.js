@@ -11,23 +11,26 @@ import Preview from './src/screens/Preview';
 import Edit from './src/components/Edit';
 import ImgToPdf from './src/screens/ImgToPdf';
 import TFI from './src/components/TextFromImage';
+import {randomColor} from './src/utils/helper';
 
 const Stack = createStackNavigator();
 
 export default function App() {
+    const bg = randomColor();
     return (
         <NavigationContainer>
-            <StatusBar barStyle="dark-content" backgroundColor="white"/>
+            <StatusBar barStyle="dark-content" backgroundColor={bg}/>
             <Stack.Navigator initialRouteName={'Home'}>
                 <Stack.Screen name="Home" component={HomeScreen} options={{
                     title: 'CamX',
                     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                     headerStyle: {
-                        backgroundColor: 'white',
+                        backgroundColor: bg,
                     },
                     headerTitleStyle: {
                         fontSize: 45,
                         alignSelf: 'center',
+                        color:'white'
                     },
                 }}/>
                 <Stack.Screen name="TTS" component={TextToSpeech} options={{
@@ -36,6 +39,11 @@ export default function App() {
                     headerTitleStyle: {
                         fontSize: 30,
                         alignSelf: 'center',
+                        color:'white'
+                    },
+                    headerLeft: false,
+                    headerStyle: {
+                        backgroundColor: bg,
                     },
                 }}/>
                 <Stack.Screen name="STT" component={SpeechText} options={{
@@ -43,6 +51,10 @@ export default function App() {
                     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                     headerTitleStyle: {
                         fontSize: 30,
+                        color:'white'
+                    },
+                    headerStyle: {
+                        backgroundColor: bg,
                     },
                 }}/>
                 <Stack.Screen name="Camera" component={Camera} options={{
@@ -53,6 +65,10 @@ export default function App() {
                     title: 'Preview',
                     headerTitleStyle: {
                         fontSize: 35,
+                        color:'white'
+                    },
+                    headerStyle: {
+                        backgroundColor: bg,
                     },
                 }}/>
                 <Stack.Screen name="Edit" component={Edit} options={{
@@ -63,6 +79,10 @@ export default function App() {
                     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                     headerTitleStyle: {
                         fontSize: 30,
+                        color:'white'
+                    },
+                    headerStyle: {
+                        backgroundColor: bg,
                     },
                 }}/>
                 <Stack.Screen name="TFI" component={TFI} options={{
@@ -70,6 +90,10 @@ export default function App() {
                     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                     headerTitleStyle: {
                         fontSize: 30,
+                        color:'white'
+                    },
+                    headerStyle: {
+                        backgroundColor: bg,
                     },
                 }}/>
             </Stack.Navigator>

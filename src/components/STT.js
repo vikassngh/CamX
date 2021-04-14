@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {randomColor} from '../utils/helper';
 import Clipboard from '@react-native-clipboard/clipboard';
 
+const bg = randomColor();
 const SpeechText = () => {
     const [pitch, setPitch] = useState('');
     const [error, setError] = useState('');
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
     button2: {
         width: '30%',
         height: '6%',
-        backgroundColor: 'black',
+        backgroundColor: bg,
         borderWidth: 1,
         borderRadius: 20,
         margin: '2%',
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
     },
     resultView: {
         height: '50%',
-        backgroundColor: randomColor(),
+        backgroundColor: bg,
         width: '100%',
         borderRadius: 10,
     },
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
     button: {
         height: 80,
         width: 80,
-        backgroundColor: 'black',
+        backgroundColor: bg,
         borderRadius: 40,
         justifyContent: 'center',
         alignItems: 'center',

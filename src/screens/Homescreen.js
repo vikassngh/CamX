@@ -38,7 +38,7 @@ export default function HomeScreen({navigation}) {
         <SafeAreaView forceInset={{top: 'always'}}>
             <View style={styles.container}>
                 <TouchableOpacity
-                    style={styles.wideButton}
+                    style={{...styles.wideButton,backgroundColor: randomColor()}}
                     onPress={selectPdfFile}
                 >
                     <Icon name="file-pdf-o" size={80} color={'white'}/>
@@ -47,43 +47,43 @@ export default function HomeScreen({navigation}) {
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={styles.button}
+                    style={{...styles.button,marginLeft:'5%',marginRight:'2.5%',backgroundColor: randomColor(),}}
                     onPress={() => navigation.navigate('TFI')}
                 >
-                    <Icon name="file-text-o" size={80} color={'white'}/>
+                    <Icon name="file-text-o" size={75} color={'white'}/>
                     <Text style={styles.buttonText}>
                         Text From Image
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={styles.button}
+                    style={{...styles.button,marginRight:'5%',marginLeft:'2.5%',backgroundColor: randomColor(),}}
                     onPress={() => navigation.navigate('imgToPdf')}
                 >
-                    <Icon name="image" size={80} color={'white'}/>
+                    <Icon name="image" size={75} color={'white'}/>
                     <Text style={styles.buttonText}>
                         Image To PDF
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={styles.button}
+                    style={{...styles.button,marginLeft:'5%',marginRight:'2.5%',backgroundColor: randomColor(),}}
                     onPress={() => navigation.navigate('STT')}
                 >
-                    <Icon name="microphone" size={80} color={'white'}/>
+                    <Icon name="microphone" size={75} color={'white'}/>
                     <Text style={styles.buttonText}>
                         Speech to Text
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={styles.button}
+                    style={{...styles.button,marginRight:'5%',marginLeft:'2.5%',backgroundColor: randomColor(),}}
                     onPress={() => navigation.navigate('TTS')}
                 >
-                    <Icon name="headphones" size={80} color={'white'}/>
+                    <Icon name="headphones" size={75} color={'white'}/>
                     <Text style={styles.buttonText}>
                         Text to Speech
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={styles.wideButton}
+                    style={{...styles.wideButton,backgroundColor: randomColor(),marginBottom:'2.5%'}}
                     onPress={() => navigation.navigate('Camera', {
                         photo: [],
                     })}
@@ -107,25 +107,24 @@ const styles = StyleSheet.create({
         height: height,
     },
     wideButton: {
-        width: '99%',
-        height: height / 4.6,
-        margin: '0.5%',
+        width: '90%',
+        height: height / 4.8,
+        marginHorizontal: '5%',
+        marginVertical: '2.5%',
         borderWidth: 5,
         borderRadius: 30,
         borderColor: 'white',
-        backgroundColor: randomColor(),
         justifyContent: 'center',
         alignSelf: 'center',
         alignItems: 'center',
     },
     button: {
-        width: '49%',
+        width: '42%',
         height: height / 4.6,
-        margin: '0.5%',
+        marginBottom:'2.5%',
         borderWidth: 5,
         borderRadius: 30,
         borderColor: 'white',
-        backgroundColor: randomColor(),
         justifyContent: 'center',
         alignSelf: 'center',
         alignItems: 'center',
@@ -133,6 +132,6 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#FFFFFF',
         paddingVertical: 5,
-        fontSize: 22,
+        fontSize: 19,
     },
 });

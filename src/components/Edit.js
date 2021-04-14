@@ -2,11 +2,15 @@ import React, {useState, useRef, useEffect} from 'react';
 import {StatusBar, StyleSheet, View, SafeAreaView, TouchableOpacity} from 'react-native';
 import {CropView} from 'react-native-image-crop-tools';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useNavigationState} from '@react-navigation/native';
 
 export default function Edit({route, navigation}) {
     const {photo, idx} = route.params;
     const [uri, setUri] = useState();
     const cropViewRef = useRef();
+
+
+    const index = useNavigationState(state => state.index);
 
     useEffect(() => {
         const image = photo[idx].uri;
@@ -22,9 +26,15 @@ export default function Edit({route, navigation}) {
                     onPress={() => {
                         photo.splice(idx, 1);
                         if (photo[0]) {
-                            navigation.navigate('Preview', {
-                                photo: photo,
+                          if(index === 2){
+                            navigation.navigate('imgToPdf', {
+                              photo: photo
                             });
+                          } else {
+                            navigation.navigate('Preview', {
+                              photo: photo
+                            });
+                          }
                         } else {
                             navigation.navigate('Camera', {
                                 photo: photo,
@@ -43,10 +53,15 @@ export default function Edit({route, navigation}) {
                     ref={cropViewRef}
                     onImageCrop={(res) => {
                         photo[idx] = res;
-                        navigation.navigate('Preview', {
+                        if(index === 2){
+                          navigation.navigate('imgToPdf', {
                             photo: photo,
-                            idx: idx,
-                        });
+                          });
+                        } else {
+                          navigation.navigate('Preview', {
+                            photo: photo
+                          });
+                        }
                     }}
                     aspectRatio={{width: 16, height: 9}}
                 />}
