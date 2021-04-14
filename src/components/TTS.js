@@ -161,7 +161,7 @@ export default function TextToSpeech({navigation}) {
                         minimumValue={0.01}
                         maximumValue={0.99}
                         onValueChange={updateSpeechRate}
-                        thumbStyle={{height: 20, width: 20, backgroundColor: randomColor()}}
+                        thumbStyle={{height: 20, width: 20, backgroundColor: bg}}
                     />
                 </View>
                 <View style={styles.sliderContainer}>
@@ -174,7 +174,7 @@ export default function TextToSpeech({navigation}) {
                         minimumValue={0.01}
                         maximumValue={0.99}
                         onValueChange={updateSpeechPitch}
-                        thumbStyle={{height: 20, width: 20, backgroundColor: randomColor()}}
+                        thumbStyle={{height: 20, width: 20, backgroundColor: bg}}
                     />
                 </View>
                 <Text style={styles.sliderContainer}>
@@ -277,8 +277,7 @@ const styles = StyleSheet.create({
         backgroundColor: bg,
         borderWidth: 1,
         borderRadius: 20,
-        marginTop: 5,
-        marginBottom: 20,
+        marginVertical: 10,
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
@@ -301,6 +300,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        marginVertical: 20,
+        marginVertical: '3%',
     },
 });
