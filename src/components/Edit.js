@@ -78,7 +78,7 @@ export default function Edit({route, navigation}) {
                 <TouchableOpacity
                     style={{marginVertical: 20, marginHorizontal: 30}}
                     onPress={() => {
-                        cropViewRef.current.rotateImage(true);
+                        cropViewRef.current.rotateImage(false);
                     }}
                 >
                     <Icon name="rotate-left" size={42} color={'white'}/>

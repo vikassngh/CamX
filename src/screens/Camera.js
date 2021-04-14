@@ -12,6 +12,7 @@ export default class Camera extends React.Component {
             photo: props.route.params.photo,
             type: RNCamera.Constants.Type.back,
             autoFocus: RNCamera.Constants.AutoFocus.on,
+            ratio:'4:3',
         };
     }
 
@@ -21,6 +22,7 @@ export default class Camera extends React.Component {
             flashMode,
             type,
             autoFocus,
+            ratio,
         } = this.state;
         const {navigation} = this.props;
         return (
@@ -35,6 +37,7 @@ export default class Camera extends React.Component {
                         type={type}
                         flashMode={flashMode}
                         autoFocus={autoFocus}
+                        ratio={ratio}
                         androidCameraPermissionOptions={{
                             title: 'Permission to use camera',
                             message: 'We need your permission to use your camera',
@@ -129,6 +132,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
+        marginTop:'20%',
+        marginBottom:'32%',
     },
     button: {
         marginLeft: 20,
