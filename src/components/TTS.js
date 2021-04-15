@@ -4,7 +4,7 @@ import {
     SafeAreaView, Text, FlatList, Keyboard, Modal, BackHandler, Alert,
 } from 'react-native';
 import {Slider} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Tts from 'react-native-tts';
 import {useFocusEffect} from '@react-navigation/native';
 import { randomColor } from "../utils/helper";
@@ -214,7 +214,7 @@ export default function TextToSpeech({navigation}) {
                     title="Press to hear some words"
                     style={styles.speak}
                     onPress={playing ? stopText : readText}>
-                    <Icon name="volume-high" size={60} color={'white'}/>
+                    <Icon name="volume-up" size={60} color={'white'}/>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

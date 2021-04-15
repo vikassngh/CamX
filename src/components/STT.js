@@ -29,27 +29,22 @@ const SpeechText = () => {
     }, []);
 
     const onSpeechStart = (e) => {
-        console.log('onSpeechStart: ', e);
         setStarted('√');
     };
 
     const onSpeechEnd = (e) => {
-        console.log('onSpeechEnd: ', e);
         setEnd('√');
     };
 
     const onSpeechError = (e) => {
-        console.log('onSpeechError: ', e);
         setError(JSON.stringify(e.error.message));
     };
 
     const onSpeechResults = (e) => {
-        console.log('onSpeechResults: ', e);
         setResults(e.value);
     };
 
     const onSpeechVolumeChanged = (e) => {
-        console.log('onSpeechVolumeChanged: ', e);
         setPitch(e.value);
     };
 
@@ -126,7 +121,9 @@ const SpeechText = () => {
                                                 'The text has been copied to clipboard.');
                                         }}
                                         style={styles.textStyle}>
-                                        {result}
+                                        <Text>
+                                            {result}
+                                        </Text>
                                     </TouchableOpacity>
                                 );
                             })}
@@ -170,8 +167,7 @@ const styles = StyleSheet.create({
         flex: 1,
         textAlign: 'center',
         color: '#B0171F',
-        fontSize: 18,
-        fontWeight: 'bold',
+        fontSize: 15,
     },
     button2: {
         width: '30%',
